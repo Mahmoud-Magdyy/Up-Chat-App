@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/repository/auth_repo.dart';
 import 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthInitial());
-
+  AuthCubit(this.authRepo) : super(AuthInitial());
+  final AuthRepo authRepo;
   static AuthCubit get(context) => BlocProvider.of(context);
 
 //auth logic
@@ -37,5 +38,31 @@ class AuthCubit extends Cubit<AuthState> {
   void changeDepartmentValue(d) {
     dropDownValueDepartment = d!;
     emit(ChangeDepartmentValueState());
+  }
+
+// login
+  void login() async {
+    emit(LoginLoadingState());
+    var res = await authRepo.login(
+        email: emailLoginController.text,
+        password: passwordLoginController.text);
+    res.fold(
+        (l) => emit(LoginErrorState(message: l)),
+        (r) => emit(
+              LoginSucessfulltyState(message: r),
+            ));
+  }
+
+  //forget password
+  void forgetPassword() async {
+    emit(ForgetPasswordLoadingState());
+    var res = await authRepo.forgetPassword(
+      email: emailLoginController.text,
+    );
+    res.fold(
+        (l) => emit(ForgetPasswordErrorState(message: l)),
+        (r) => emit(
+              ForgetPasswordSucessfulltyState(message: r),
+            ));
   }
 }

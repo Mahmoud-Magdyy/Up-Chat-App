@@ -1,16 +1,17 @@
 name: up_chat_app
 description: A new Flutter project.
 
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.0 <4.0.0'
+  sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
   cloud_firestore: null
   cupertino_icons: ^1.0.2
+  dartz: 
   firebase_auth: null
   firebase_core: null
   flutter:
@@ -31,7 +32,6 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-
   uses-material-design: true
   assets:
     - images/

@@ -16,7 +16,22 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: BlocBuilder<AuthCubit, AuthState>(
+      body: SafeArea(
+          child: BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state) {
+          if (state is LoginSucessfulltyState) {
+            showToast(message: state.message, state: ToastStates.success);
+          }
+          if (state is LoginErrorState) {
+            showToast(message: state.message, state: ToastStates.error);
+          }
+          if (state is ForgetPasswordSucessfulltyState) {
+            showToast(message: state.message, state: ToastStates.success);
+          }
+          if (state is ForgetPasswordErrorState) {
+            showToast(message: state.message, state: ToastStates.error);
+          }
+        },
         builder: (context, state) {
           var cubit = AuthCubit.get(context);
           return Padding(
@@ -74,28 +89,32 @@ class LoginScreen extends StatelessWidget {
                     Row(
                       children: [
                         const Spacer(),
-                        TextButton(
-                          onPressed: () async {
-                            // cubit.forgetPassword(context);
-                          },
-                          child: Text(
-                            'Forget Password?',
-                          ),
-                        ),
+                        state is ForgetPasswordLoadingState
+                            ? const CircularProgressIndicator()
+                            : TextButton(
+                                onPressed: () async {
+                                  cubit.forgetPassword();
+                                },
+                                child: const Text(
+                                  'Forget Password?',
+                                ),
+                              ),
                       ],
                     ),
                     SizedBox(
                       height: 15.h,
                     ),
                     //sign in button
-                    CustomButton(
-                      text: 'Sign in',
-                      onPressed: () async {
-                        if (cubit.formLoginKey.currentState!.validate()) {
-                          // await cubit.loginUser(context: context);
-                        }
-                      },
-                    ),
+                    state is LoginLoadingState
+                        ? const CircularProgressIndicator()
+                        : CustomButton(
+                            text: 'Sign in',
+                            onPressed: () async {
+                              if (cubit.formLoginKey.currentState!.validate()) {
+                                cubit.login();
+                              }
+                            },
+                          ),
                     SizedBox(
                       height: 25.h,
                     ),

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/app/app.dart';
@@ -11,7 +12,7 @@ void main() async {
   initServiceLoactor();
   await sl<CacheHelper>().init();
   // await sl<CacheHelper>().removeData(key: AppStrings.onBoardingKey);
-  // await Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(
     MultiBlocProvider(
       providers: [

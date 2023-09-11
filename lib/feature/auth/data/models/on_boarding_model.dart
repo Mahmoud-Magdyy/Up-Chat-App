@@ -1,5 +1,5 @@
-import '../../../../core/utils/app_assets.dart';
-import '../../../../core/utils/app_strings.dart';
+import '../../../../../core/utils/app_assets.dart';
+import '../../../../../core/utils/app_strings.dart';
 
 class OnBoardingModel {
   final String title;

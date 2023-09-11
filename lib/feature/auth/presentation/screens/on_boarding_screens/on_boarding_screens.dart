@@ -11,7 +11,7 @@ import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/commons.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/custom_text_button.dart';
-import '../../../model/on_boarding_model.dart';
+import '../../../data/models/on_boarding_model.dart';
 
 class OnBoaringScreens extends StatelessWidget {
   OnBoaringScreens({super.key});
