@@ -10,6 +10,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initServiceLoactor();
   await sl<CacheHelper>().init();
+  // await sl<CacheHelper>().removeData(key: AppStrings.onBoardingKey);
   // await Firebase.initializeApp();
   runApp(
     MultiBlocProvider(
