@@ -14,6 +14,17 @@ class LoginErrorState extends AuthState {
 
   LoginErrorState({required this.message});
 }
+class SignUpLoadingState extends AuthState {}
+class SignUpSucessfulltyState extends AuthState {
+   final String message;
+
+  SignUpSucessfulltyState({required this.message});
+}
+class SignUpErrorState extends AuthState {
+  final String message;
+
+  SignUpErrorState({required this.message});
+}
 class ForgetPasswordLoadingState extends AuthState {}
 class ForgetPasswordSucessfulltyState extends AuthState {
    final String message;

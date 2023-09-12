@@ -4,6 +4,28 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthRepo {
 
   // Either<int,int>
+  //signUn
+  Future<Either<String, String>> signUp({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      UserCredential user =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return const Right('SignUp Sussefully');
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        return const Left('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        return const Left('Wrong password provided for that user.');
+      } else {
+        return Left(e.code.toString());
+      }
+    }
+  }
 //login
   Future<Either<String, String>> login({
     required String email,

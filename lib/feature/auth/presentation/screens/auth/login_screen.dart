@@ -25,12 +25,7 @@ class LoginScreen extends StatelessWidget {
           if (state is LoginErrorState) {
             showToast(message: state.message, state: ToastStates.error);
           }
-          if (state is ForgetPasswordSucessfulltyState) {
-            showToast(message: state.message, state: ToastStates.success);
-          }
-          if (state is ForgetPasswordErrorState) {
-            showToast(message: state.message, state: ToastStates.error);
-          }
+          
         },
         builder: (context, state) {
           var cubit = AuthCubit.get(context);
@@ -89,11 +84,11 @@ class LoginScreen extends StatelessWidget {
                     Row(
                       children: [
                         const Spacer(),
-                        state is ForgetPasswordLoadingState
-                            ? const CircularProgressIndicator()
-                            : TextButton(
+                         TextButton(
                                 onPressed: () async {
-                                  cubit.forgetPassword();
+                                  navigateRepacement(
+                                      context: context,
+                                      route: Routes.forgetPassword);
                                 },
                                 child: const Text(
                                   'Forget Password?',

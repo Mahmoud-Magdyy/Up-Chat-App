@@ -133,14 +133,15 @@ class RegisterScreen extends StatelessWidget {
                     
                     onPressed: () async {
                       if (cubit.formRegisterKey.currentState!.validate()) {
+                        cubit.signUp();
                         // await cubit.registerUser(
                         //   context: context,
                         // );
                         cubit.emailRegisterController.clear();
                         cubit.passwordRegisterController.clear();
                         cubit.phoneNumberController.clear();
-                        navigate(
-                           route: Routes.login, context: context);
+                        // navigateRepacement(
+                        //    route: Routes.login, context: context);
                       }
                     },
                   ),

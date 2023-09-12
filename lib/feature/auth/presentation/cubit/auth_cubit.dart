@@ -13,6 +13,7 @@ class AuthCubit extends Cubit<AuthState> {
   final TextEditingController emailLoginController = TextEditingController();
   final TextEditingController passwordLoginController = TextEditingController();
   final TextEditingController emailRegisterController = TextEditingController();
+  final TextEditingController emailForgetPasswordController = TextEditingController();
   final TextEditingController passwordRegisterController =
       TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
@@ -38,6 +39,19 @@ class AuthCubit extends Cubit<AuthState> {
   void changeDepartmentValue(d) {
     dropDownValueDepartment = d!;
     emit(ChangeDepartmentValueState());
+  }
+
+//signin
+void signUp() async {
+    emit(SignUpLoadingState());
+    var res = await authRepo.signUp(
+        email: emailRegisterController.text,
+        password: passwordRegisterController.text);
+    res.fold(
+        (l) => emit(SignUpErrorState(message: l)),
+        (r) => emit(
+              SignUpSucessfulltyState(message: r),
+            ));
   }
 
 // login

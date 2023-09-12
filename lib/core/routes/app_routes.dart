@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:up_chat_app/feature/auth/presentation/screens/auth/forget_password_screen.dart';
 import 'package:up_chat_app/feature/auth/presentation/screens/auth/login_screen.dart';
 import 'package:up_chat_app/feature/auth/presentation/screens/auth/register_screen.dart';
 import 'package:up_chat_app/feature/auth/presentation/screens/on_boarding_screens/on_boarding_screens.dart';
@@ -10,6 +11,7 @@ class Routes {
   static const String login = '/login';
   static const String register = '/register';
   static const String home = '/home';
+  static const String forgetPassword = '/forgetPassword';
  
 }
 
@@ -24,6 +26,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case Routes.register:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
+      case Routes.forgetPassword:
+        return MaterialPageRoute(builder: (_) => const ForgetPasswordScreen());
 
     
       default:
