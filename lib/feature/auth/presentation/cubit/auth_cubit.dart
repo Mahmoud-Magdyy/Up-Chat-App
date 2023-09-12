@@ -19,7 +19,6 @@ class AuthCubit extends Cubit<AuthState> {
   final TextEditingController nameController = TextEditingController();
   final GlobalKey<FormState> formLoginKey = GlobalKey<FormState>();
   final GlobalKey<FormState> formRegisterKey = GlobalKey<FormState>();
-  // final userAccount = FirebaseAuth.instance;
 
   IconData suffixIcon = Icons.visibility;
   bool isPasswordShown = true;
@@ -49,7 +48,7 @@ class AuthCubit extends Cubit<AuthState> {
     res.fold(
         (l) => emit(LoginErrorState(message: l)),
         (r) => emit(
-              LoginSucessfulltyState(message: r),
+              LoginSucessfulltyState(message: r.name),
             ));
   }
 
@@ -63,6 +62,22 @@ class AuthCubit extends Cubit<AuthState> {
         (l) => emit(ForgetPasswordErrorState(message: l)),
         (r) => emit(
               ForgetPasswordSucessfulltyState(message: r),
+            ));
+  }
+  //register
+  void register()async{
+ emit(RegisterLoadingState());
+    var res = await authRepo.register(
+        email: emailRegisterController.text,
+        password: passwordRegisterController.text,
+        department: dropDownValueDepartment,
+        name: nameController.text,
+        phone: phoneNumberController.text
+        );
+    res.fold(
+        (l) => emit(RegisterErrorState(message: l)),
+        (r) => emit(
+              RegisterSucessfulltyState(message: r),
             ));
   }
 }
