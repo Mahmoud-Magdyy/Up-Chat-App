@@ -143,7 +143,7 @@ class RegisterScreen extends StatelessWidget {
                             onPressed: () async {
                               if (cubit.formRegisterKey.currentState!
                                   .validate()) {
-                                cubit.register();
+                                // cubit.register();
                               }
                             },
                           ),

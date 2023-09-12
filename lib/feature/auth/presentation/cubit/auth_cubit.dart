@@ -48,7 +48,7 @@ class AuthCubit extends Cubit<AuthState> {
     res.fold(
         (l) => emit(LoginErrorState(message: l)),
         (r) => emit(
-              LoginSucessfulltyState(message: r.name),
+              LoginSucessfulltyState(message: r),
             ));
   }
 
@@ -65,19 +65,5 @@ class AuthCubit extends Cubit<AuthState> {
             ));
   }
   //register
-  void register()async{
- emit(RegisterLoadingState());
-    var res = await authRepo.register(
-        email: emailRegisterController.text,
-        password: passwordRegisterController.text,
-        department: dropDownValueDepartment,
-        name: nameController.text,
-        phone: phoneNumberController.text
-        );
-    res.fold(
-        (l) => emit(RegisterErrorState(message: l)),
-        (r) => emit(
-              RegisterSucessfulltyState(message: r),
-            ));
-  }
+
 }
